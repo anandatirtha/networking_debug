@@ -1,0 +1,33 @@
+
+CHECKING state
+  sysctl net | grep <param>
+  sysctl net | grep rp_filter
+  sysctl -w  net.ipv4.conf.enp0s8.rp_filter=0
+
+DEBUGGING IPTABLES
+  iptables -Z or iptables -t <table_name> -Z
+
+  iptables -L -v > ipt1
+
+  Perform some tests
+
+  iptables -L -v > ipt2
+
+  vimdiff ipt1 ipt2
+
+  iptables -t mangle -I PREROUTING -i enp0s10 -p tcp --tcp-flags ALL SYN,ACK -j LOG
+  above commands is useful to check packet counts 
+
+
+
+Checking packet counters
+  nstat
+  nstat 
+  perform tests
+  nsat
+
+
+ENABLE Forwarding
+  echo 1 > /proc/sys/net/ipv4/ip_forward
+
+
